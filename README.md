@@ -1,1 +1,2 @@
-# Lab1_2
+# BinaryCalc
+kal'kulyator dviykovih chisel
