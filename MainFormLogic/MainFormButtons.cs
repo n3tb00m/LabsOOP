@@ -27,6 +27,7 @@ namespace Lab2_2
             rectangleButton.Focus();
             PaintManager.Instance.Type = FigureType.Rectangle;
         }
+
         private void colorPickerButton_Click(object sender, EventArgs e)
         {
             colorDialog.ShowDialog();

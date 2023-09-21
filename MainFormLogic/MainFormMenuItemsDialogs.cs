@@ -51,7 +51,6 @@ namespace Lab2_2
 
                 bottomArea.Image = Image.FromFile(openFileDialog.FileName);
                 bottomArea.Size = bottomArea.Image.Size;
-                //topArea.Size = bottomArea.Size;
 
                 path = openFileDialog.FileName;
 

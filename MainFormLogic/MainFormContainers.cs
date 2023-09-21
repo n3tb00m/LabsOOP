@@ -23,7 +23,7 @@ namespace Lab2_2
 
         private void container_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (isDragging && e.Button == MouseButtons.Left)
             {
                 isDragging = false;
                 PaintManager.Instance.PaintFigure();
