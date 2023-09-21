@@ -317,6 +317,7 @@
             Controls.Add(flowLayoutPanel1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
