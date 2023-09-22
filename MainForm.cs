@@ -47,8 +47,6 @@ namespace Lab2_2
             container = new TransparentContainer(bottomArea, new Size(defaultSize.Width,
                 defaultSize.Height), Point.Empty);
 
-            bottomArea.BringToFront();
-
             container.MouseDown += container_MouseDown;
             container.MouseUp += container_MouseUp;
             container.MouseMove += container_MouseMove;

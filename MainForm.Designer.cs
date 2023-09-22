@@ -278,7 +278,7 @@
             // 
             // hScrollBar1
             // 
-            hScrollBar1.Anchor = AnchorStyles.Bottom;
+            hScrollBar1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             hScrollBar1.LargeChange = 1;
             hScrollBar1.Location = new Point(74, 614);
             hScrollBar1.Name = "hScrollBar1";
@@ -289,7 +289,7 @@
             // 
             // vScrollBar1
             // 
-            vScrollBar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            vScrollBar1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             vScrollBar1.LargeChange = 1;
             vScrollBar1.Location = new Point(1200, 31);
             vScrollBar1.Name = "vScrollBar1";
@@ -305,6 +305,7 @@
             topArea.Name = "topArea";
             topArea.Size = new Size(1120, 575);
             topArea.TabIndex = 6;
+            topArea.SizeChanged += topArea_SizeChanged;
             // 
             // MainForm
             // 

@@ -8,19 +8,17 @@
 
     internal class Pin : Control
     {
-        private PinPosition _pinPosition;
         public bool horizontal = false;
         public bool vertical = false;
         private Point dragStartPoint;
+        private PinPosition _pinPosition;
+        private bool pinDragging = false;
 
         public Pin(Control prnt, PinPosition position)
         {
             Parent = prnt;
             Size = new Size(5, 5);
             _pinPosition = position;
-
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
             BackColor = Color.Lime;
 
@@ -66,19 +64,20 @@
         {
             if (e.Button == MouseButtons.Left)
             {
-                dragStartPoint = new Point(Cursor.Position.X - e.Location.X, Cursor.Position.Y - e.Location.Y);
+                dragStartPoint = PointToScreen(e.Location);
             }
         }
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                Point currentPoint = new Point(Cursor.Position.X, Cursor.Position.Y);
+                Point currentPoint = PointToScreen(e.Location);
 
                 int dX = currentPoint.X - dragStartPoint.X;
                 int dY = currentPoint.Y - dragStartPoint.Y;
 
-                if (dX < -Parent.Width || dY < -Parent.Height) return;
+                if (dX < -this.Parent.Width || dY < -this.Parent.Height) return;
 
                 if (horizontal) this.Parent.Parent.Width += dX;
                 if (vertical) this.Parent.Parent.Height += dY;

@@ -11,9 +11,9 @@
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            int dy = (dHeight) / (100 - verticalScrollPercentage);
+            double dy = (double)dHeight / (100 - verticalScrollPercentage);
 
-            bottomArea.Location = new Point(bottomArea.Location.X, -e.NewValue * dy);
+            bottomArea.Location = new Point(bottomArea.Location.X, (int)Math.Ceiling((double)-e.NewValue * dy));
         }
     }
 }

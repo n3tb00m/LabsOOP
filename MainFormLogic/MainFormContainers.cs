@@ -52,19 +52,34 @@ namespace Lab2_2
             container.Location = Point.Empty;
             bottomArea.Location = Point.Empty;
 
-            dWidth = bottomArea.Size.Width - defaultSize.Width;
-            dHeight = bottomArea.Size.Height - defaultSize.Height;
+            AdjustScrollbars();
+
+            imageSizeStatusLabel.Text = string.Format("{0} px, {1} px", bottomArea.Size.Width, bottomArea.Size.Height);
+
+            PaintManager.Instance.ResetImage(ref currentImage);
+        }
+
+        private void topArea_SizeChanged(object sender, EventArgs e)
+        {
+            AdjustScrollbars();
+        }
+
+        private void AdjustScrollbars()
+        {
+            dWidth = bottomArea.Size.Width - topArea.Width;
+            dHeight = bottomArea.Size.Height - topArea.Height;
 
             if (dWidth > 0)
             {
-                horizontalScrollPercentage = (int)Math.Round((double)defaultSize.Width * 100 / bottomArea.Size.Width);
+                horizontalScrollPercentage = topArea.Width * 100 / bottomArea.Size.Width;
                 hScrollBar1.LargeChange = horizontalScrollPercentage;
 
                 hScrollBar1.Visible = true;
             }
+
             if (dHeight > 0)
             {
-                verticalScrollPercentage = (int)Math.Round((double)defaultSize.Height * 100 / bottomArea.Size.Height);
+                verticalScrollPercentage = topArea.Height * 100 / bottomArea.Size.Height;
                 vScrollBar1.LargeChange = verticalScrollPercentage;
 
                 vScrollBar1.Visible = true;
@@ -74,10 +89,6 @@ namespace Lab2_2
                 if (dWidth <= 0) hScrollBar1.Visible = false;
                 vScrollBar1.Visible = false;
             }
-
-            imageSizeStatusLabel.Text = string.Format("{0} px, {1} px", bottomArea.Size.Width, bottomArea.Size.Height);
-
-            PaintManager.Instance.ResetImage(ref currentImage);
         }
     }
 }
