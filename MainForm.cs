@@ -9,7 +9,7 @@ namespace Lab2_2
     {
         private bool isDragging = false;
 
-        private PictureBox bottomArea = null!;
+        private DrawingArea bottomArea = null!;
         private TransparentContainer container = null!;
 
         private string path = string.Empty;
@@ -18,6 +18,7 @@ namespace Lab2_2
         private Bitmap currentImage = null!;
 
         private Size defaultSize = new Size(1120, 575);
+        private Size previousTopAreaSize;
         private Point location = new Point(74, 31);
 
         private int verticalScrollPercentage;
@@ -59,6 +60,7 @@ namespace Lab2_2
             positionStatusLabel.Text = "";
             imageSizeStatusLabel.Text = string.Format("{0} px, {1} px", bottomArea.Size.Width, bottomArea.Size.Height);
             colorPickerButton.BackColor = PaintManager.Instance.Pen.Color;
+            previousTopAreaSize = topArea.Size;
         }
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)

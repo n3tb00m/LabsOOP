@@ -17,5 +17,10 @@ namespace Lab2_2.Controls
             SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
+
+        protected override void OnPaint (PaintEventArgs e) // тут переробити
+        {
+            base.OnPaint (e);
+        }
     }
 }

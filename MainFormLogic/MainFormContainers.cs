@@ -62,6 +62,29 @@ namespace Lab2_2
         private void topArea_SizeChanged(object sender, EventArgs e)
         {
             AdjustScrollbars();
+
+            if (bottomArea.Location.X < 0)
+            {
+                int dx = dWidth / (100 - horizontalScrollPercentage);
+                int dSizeWidth = topArea.Width - previousTopAreaSize.Width;
+
+                if (dSizeWidth < -bottomArea.Location.X)
+                    bottomArea.Location = new Point(bottomArea.Location.X + dSizeWidth, bottomArea.Location.Y);
+
+                hScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.X / dx);
+            }
+            if (bottomArea.Location.Y < 0)
+            {
+                int dy = dHeight / (100 - verticalScrollPercentage);
+                int dSizeHeight = topArea.Height - previousTopAreaSize.Height;
+
+                if (dSizeHeight < -bottomArea.Location.Y)
+                    bottomArea.Location = new Point(bottomArea.Location.X, bottomArea.Location.Y + dSizeHeight);
+
+                vScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.Y / dy);
+            }
+
+            previousTopAreaSize = topArea.Size;
         }
 
         private void AdjustScrollbars()
