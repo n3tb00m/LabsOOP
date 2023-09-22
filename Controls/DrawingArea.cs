@@ -18,9 +18,9 @@ namespace Lab2_2.Controls
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
-        protected override void OnPaint (PaintEventArgs e) // тут переробити
+        protected override void OnLocationChanged(EventArgs e) // потрібно для плавного переміщення зображення при великих розмірах
         {
-            base.OnPaint (e);
+            Application.DoEvents();
         }
     }
 }
