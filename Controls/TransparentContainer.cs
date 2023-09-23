@@ -16,12 +16,10 @@
 
             Pin br = new Pin(this, PinPosition.Bottom | PinPosition.Right);
 
-            SetStyle(ControlStyles.ContainerControl | ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.Opaque, false);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint |
+                ControlStyles.SupportsTransparentBackColor |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
 
             BackColor = Color.Transparent;
         }

@@ -4,9 +4,9 @@
     {
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            int dx = (dWidth) / (100 - horizontalScrollPercentage);
+            double dx = (double)dWidth / (100 - horizontalScrollPercentage);
 
-            bottomArea.Location = new Point(-e.NewValue * dx, bottomArea.Location.Y);
+            bottomArea.Location = new Point((int)Math.Ceiling((double)-e.NewValue * dx), bottomArea.Location.Y);
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)

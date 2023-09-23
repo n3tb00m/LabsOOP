@@ -11,11 +11,11 @@ namespace Lab2_2.Controls
             Size = size;
             Location = location;
 
-            SetStyle(ControlStyles.Opaque, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.Opaque |
+                ControlStyles.UserPaint |
+                ControlStyles.SupportsTransparentBackColor |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         protected override void OnLocationChanged(EventArgs e) // потрібно для плавного переміщення зображення при великих розмірах
