@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using Lab2_2.Shapes;
 
 namespace Lab2_2.Services
 {
@@ -20,7 +20,9 @@ namespace Lab2_2.Services
         private Control drawingArea = null!;
         private PictureBox bottomArea = null!;
         private Graphics drawingGraphics = null!;
-        private Graphics bottomGraphics = null!;
+        public Graphics bottomGraphics = null!;
+        private Shape figure;
+
         public static PaintManager Instance
         {
             get
@@ -54,28 +56,25 @@ namespace Lab2_2.Services
             bottomGraphics = Graphics.FromImage(bottomArea.Image);
         }
 
+        public void CreateFigure()
+        {
+            switch (Type)
+            {
+                case FigureType.Line: figure = new Line(startPoint); break;
+                case FigureType.Ellipse: figure = new Ellipse(startPoint); break;
+                case FigureType.Rectangle: figure = new Rect(startPoint); break;
+            }
+        }
+
         public void PaintDot(Point p)
         {
             bottomGraphics.FillRectangle(Pen.Brush, p.X - Pen.Width / 2, p.Y - Pen.Width / 2, Pen.Width, Pen.Width);
         }
 
-        public void PaintFigure()
+        public void PaintFigure(Graphics g)
         {
-            Point centerPoint = new Point((startPoint.X + endPoint.X) / 2, (startPoint.Y + endPoint.Y) / 2);
-            int width = Math.Abs(startPoint.X - endPoint.X);
-            int height = Math.Abs(startPoint.Y - endPoint.Y);
-
-            switch (Type)
-            {
-                case FigureType.Line:
-                    bottomGraphics.DrawLine(Pen, startPoint, endPoint); break;
-
-                case FigureType.Ellipse:
-                    bottomGraphics.DrawEllipse(Pen, new Rectangle(centerPoint.X - width / 2, centerPoint.Y - height / 2, width, height)); break;
-
-                case FigureType.Rectangle:
-                    bottomGraphics.DrawRectangle(Pen, new Rectangle(centerPoint.X - width / 2, centerPoint.Y - height / 2, width, height)); break;
-            }
+            figure.SetEndPoint(endPoint);
+            figure.Draw(g);
         }
 
         public void Paint(Point p)
@@ -90,29 +89,10 @@ namespace Lab2_2.Services
                     }
 
                 case FigureType.Line:
-                    {
-                        drawingGraphics.DrawLine(Instance.Pen, startPoint, endPoint);
-                        break;
-                    }
-
                 case FigureType.Ellipse:
-                    {
-                        Point centerPoint = new Point((startPoint.X + endPoint.X) / 2, (startPoint.Y + endPoint.Y) / 2);
-                        int width = Math.Abs(startPoint.X - endPoint.X);
-                        int height = Math.Abs(startPoint.Y - endPoint.Y);
-
-                        drawingGraphics.DrawEllipse(Pen, new Rectangle(centerPoint.X - width / 2, centerPoint.Y - height / 2,
-                            width, height)); break;
-                    }
-
                 case FigureType.Rectangle:
                     {
-                        Point centerPoint = new Point((startPoint.X + endPoint.X) / 2, (startPoint.Y + endPoint.Y) / 2);
-                        int width = Math.Abs(startPoint.X - endPoint.X);
-                        int height = Math.Abs(startPoint.Y - endPoint.Y);
-
-
-                        drawingGraphics.DrawRectangle(Pen, new Rectangle(centerPoint.X - width / 2, centerPoint.Y - height / 2, width, height)); break;
+                        PaintFigure(drawingGraphics); break;
                     }
             }
         }

@@ -12,11 +12,15 @@ namespace Lab2_2
 
                 PaintManager.Instance.startPoint = e.Location;
                 PaintManager.Instance.endPoint = e.Location;
-                PaintManager.Instance.points.Add(e.Location);
 
                 if (PaintManager.Instance.Type == FigureType.Pencil)
                 {
+                    PaintManager.Instance.points.Add(e.Location);
                     PaintManager.Instance.PaintDot(PaintManager.Instance.startPoint);
+                }
+                else
+                {
+                    PaintManager.Instance.CreateFigure();
                 }
             }
         }
@@ -26,9 +30,15 @@ namespace Lab2_2
             if (isDragging && e.Button == MouseButtons.Left)
             {
                 isDragging = false;
-                PaintManager.Instance.PaintFigure();
-                container.Refresh();
-                PaintManager.Instance.points.Clear();
+                if (PaintManager.Instance.Type == FigureType.Pencil)
+                {
+                    PaintManager.Instance.points.Clear();
+                }
+                else
+                {
+                    PaintManager.Instance.PaintFigure(PaintManager.Instance.bottomGraphics);
+                    container.Refresh();
+                }
             }
         }
 
@@ -38,6 +48,14 @@ namespace Lab2_2
             {
                 container.Refresh();
                 PaintManager.Instance.endPoint = e.Location;
+
+                if (PaintManager.Instance.Type == FigureType.Pencil)
+                {
+                    PaintManager.Instance.points.Add(e.Location);
+
+                    PaintManager.Instance.Paint(e.Location);
+                }
+
                 PaintManager.Instance.Paint(e.Location);
             }
 
