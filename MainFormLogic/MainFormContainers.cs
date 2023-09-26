@@ -30,15 +30,18 @@ namespace Lab2_2
             if (isDragging && e.Button == MouseButtons.Left)
             {
                 isDragging = false;
+
                 if (PaintManager.Instance.Type == FigureType.Pencil)
                 {
+                    PaintManager.Instance.Paint(e.Location);
                     PaintManager.Instance.points.Clear();
                 }
                 else
                 {
                     PaintManager.Instance.PaintFigure(PaintManager.Instance.bottomGraphics);
-                    container.Refresh();
                 }
+
+                container.Refresh();
             }
         }
 
@@ -52,8 +55,6 @@ namespace Lab2_2
                 if (PaintManager.Instance.Type == FigureType.Pencil)
                 {
                     PaintManager.Instance.points.Add(e.Location);
-
-                    PaintManager.Instance.Paint(e.Location);
                 }
 
                 PaintManager.Instance.Paint(e.Location);
@@ -68,9 +69,11 @@ namespace Lab2_2
         {
             container.Size = bottomArea.Size;
             container.Location = Point.Empty;
-            bottomArea.Location = Point.Empty;
+            //bottomArea.Location = Point.Empty;
 
             AdjustScrollbars();
+
+            SetImageLocationToScrollBar();
 
             imageSizeStatusLabel.Text = string.Format("{0} px, {1} px", bottomArea.Size.Width, bottomArea.Size.Height);
 
@@ -81,26 +84,7 @@ namespace Lab2_2
         {
             AdjustScrollbars();
 
-            if (bottomArea.Location.X < 0)
-            {
-                int dx = dWidth / (100 - horizontalScrollPercentage);
-                int dSizeWidth = topArea.Width - previousTopAreaSize.Width;
-
-                if (dSizeWidth < -bottomArea.Location.X)
-                    bottomArea.Location = new Point(bottomArea.Location.X + dSizeWidth, bottomArea.Location.Y);
-
-                hScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.X / dx);
-            }
-            if (bottomArea.Location.Y < 0)
-            {
-                int dy = dHeight / (100 - verticalScrollPercentage);
-                int dSizeHeight = topArea.Height - previousTopAreaSize.Height;
-
-                if (dSizeHeight < -bottomArea.Location.Y)
-                    bottomArea.Location = new Point(bottomArea.Location.X, bottomArea.Location.Y + dSizeHeight);
-
-                vScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.Y / dy);
-            }
+            SetImageLocationToScrollBar();
 
             previousTopAreaSize = topArea.Size;
         }
@@ -129,6 +113,31 @@ namespace Lab2_2
             {
                 if (dWidth <= 0) hScrollBar1.Visible = false;
                 vScrollBar1.Visible = false;
+            }
+        }
+
+        private void SetImageLocationToScrollBar()
+        {
+            if (bottomArea.Location.X < 0)
+            {
+                int dx = dWidth / (100 - horizontalScrollPercentage);
+                int dSizeWidth = topArea.Width - previousTopAreaSize.Width;
+
+                if (dSizeWidth < -bottomArea.Location.X)
+                    bottomArea.Location = new Point(bottomArea.Location.X + dSizeWidth, bottomArea.Location.Y);
+
+                hScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.X / dx);
+            }
+
+            if (bottomArea.Location.Y < 0)
+            {
+                int dy = dHeight / (100 - verticalScrollPercentage);
+                int dSizeHeight = topArea.Height - previousTopAreaSize.Height;
+
+                if (dSizeHeight < -bottomArea.Location.Y)
+                    bottomArea.Location = new Point(bottomArea.Location.X, bottomArea.Location.Y + dSizeHeight);
+
+                vScrollBar1.Value = (int)Math.Abs((double)bottomArea.Location.Y / dy);
             }
         }
     }
