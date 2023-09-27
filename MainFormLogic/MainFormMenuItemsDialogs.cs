@@ -30,17 +30,23 @@ namespace Lab2_2
         {
             saveFileDialog.ShowDialog();
         }
+
         private void newMenuItem_Click(object sender, EventArgs e)
         {
+            bottomArea.Location = Point.Empty;
+
             bottomArea.Size = defaultSize;
 
             bottomArea.Image = new Bitmap(bottomArea.Size.Width, bottomArea.Size.Height);
 
-            bottomArea.Location = Point.Empty;
-
             Graphics.FromImage(bottomArea.Image).Clear(Color.White);
 
             PaintManager.Instance.ResetGraphics();
+
+            hScrollBar1.Value = 0;
+            vScrollBar1.Value = 0;
+
+            bottomArea.Refresh();
         }
 
         private void openFileDialog_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
