@@ -14,7 +14,9 @@ namespace TextEditor.Services
 {
     internal class TextService
     {
-        public IEnumerable<TextFile>? LoadRecentFiles(string path)
+        private static Queue<TextFile> recentFiles = new();
+
+        public static IEnumerable<TextFile>? LoadRecentFiles(string path)
         {
             return JsonSerializer.Deserialize<IEnumerable<TextFile>>(File.ReadAllText(path));
         }
@@ -58,6 +60,20 @@ namespace TextEditor.Services
             TextRange docSelection = new TextRange(doc.ContentStart, doc.ContentEnd);
 
             return docSelection.Text;
+        }
+
+        public static void AddToRecentFiles(TextFile file)
+        {
+            if (recentFiles.Count == 6)
+            {
+                recentFiles.Dequeue();
+            }
+
+            if (!recentFiles.Contains(file))
+            {
+                recentFiles.Enqueue(file);
+                File.WriteAllText("recent.json", JsonSerializer.Serialize<Queue<TextFile>>(recentFiles));
+            }
         }
     }
 }

@@ -31,9 +31,11 @@ namespace TextEditor.Models
         [JsonIgnore]
         public FlowDocument Text { get; set; } = null;
 
-        public DateTime lastChange { get; set; } = DateTime.Now;
+        public DateTime LastChange { get; set; } = DateTime.Now;
 
-        public TextFile(string path)
+        public TextFile() { }
+
+        internal TextFile(string path)
         {
             FilePath = path;
 

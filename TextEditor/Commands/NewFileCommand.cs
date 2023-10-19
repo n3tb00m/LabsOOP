@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using TextEditor.Models;
+using TextEditor.Services;
 using TextEditor.ViewModels;
 
 namespace TextEditor.Commands
@@ -26,21 +27,25 @@ namespace TextEditor.Commands
             {
                 string filepath = parameter?.ToString();
 
+                TextFile file = new TextFile(filepath);
+
                 if (vm.SelectedViewModel is TextViewModel model)
                 {
                     if (string.IsNullOrEmpty(filepath))
                     {
                         if (!model.openedFiles.Any(t => t.FileName == "New File*"))
-                            model.openedFiles.Add(new TextFile(filepath));
+                            model.openedFiles.Add(file);
                     }
-                    else model.openedFiles.Add(new TextFile(filepath));
+                    else model.openedFiles.Add(file);
                 }
                 else if (vm.SelectedViewModel is StartupViewModel)
                 {
                     vm.mediator.CurrentViewModel = new TextViewModel(vm.mediator);
 
-                    ((TextViewModel)vm.SelectedViewModel).openedFiles.Add(((TextViewModel)vm.SelectedViewModel).CurrentTextFile);
+                    ((TextViewModel)vm.SelectedViewModel).openedFiles.Add(file);
                 }
+
+                if (!string.IsNullOrEmpty(filepath)) TextService.AddToRecentFiles(file);
             }
         }
     }

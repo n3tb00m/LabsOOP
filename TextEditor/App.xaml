@@ -21,12 +21,14 @@
             </DataTemplate>
 
             <DataTemplate x:Key="FilePreviewTemplate">
-                <Button Command="{Binding DataContext.OpenPreviewFileCommand, RelativeSource={RelativeSource AncestorType=WrapPanel}}">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Path=FileName}" />
-                        <TextBlock Text="{Binding Path=FileExtension}"/>
-                        <TextBlock Text="{Binding Path=LastChange}"/>
-                    </StackPanel>
+                <Button Command="{StaticResource NewFileCommand}" CommandParameter="{Binding FilePath}" Margin="5">
+                    <DockPanel>
+                        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=LastChange}" FontSize="16"/>
+                        <DockPanel>
+                            <TextBlock Text="{Binding Path=FileName}" VerticalAlignment="Top" FontSize="14" />
+                            <TextBlock Text="{Binding Path=FileExtension}" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="16"/>
+                        </DockPanel>
+                    </DockPanel>
                 </Button>
             </DataTemplate>
 

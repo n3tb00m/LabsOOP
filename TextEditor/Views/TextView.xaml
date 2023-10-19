@@ -29,7 +29,7 @@
                     <MenuItem Header="Save as.." FontSize="14" Command="{Binding UpdateViewCommand}" CommandParameter="SaveAs"/>
 
                     <Separator/>
-
+                    <MenuItem Header="To Main" Command="{Binding UpdateViewCommand}" CommandParameter="Home" FontSize="14"/>
                     <MenuItem Header="Exit" Command="ApplicationCommands.Close" FontSize="14"/>
                 </MenuItem>
                 <MenuItem Height="30">
@@ -79,9 +79,9 @@
             <TextBlock Name="currentColumn" Text="Column: 0"/>
         </StatusBar>
 
-        <RichTextBox x:Name="textArea" VerticalAlignment="Stretch" SelectionChanged="textArea_SelectionChanged">
+        <RichTextBox x:Name="textArea" VerticalAlignment="Stretch" SelectionChanged="textArea_SelectionChanged" AcceptsTab="True">
             <RichTextBox.InputBindings>
-                <KeyBinding Key="D" Modifiers="Control" Command="{StaticResource AddCurrentDateCommand}" CommandParameter = "{Binding RelativeSource= {RelativeSource Mode=FindAncestor, AncestorType={x:Type RichTextBox}}}" />
+                <KeyBinding Key="D" Modifiers="Control+Alt" Command="{StaticResource AddCurrentDateCommand}" CommandParameter = "{Binding RelativeSource= {RelativeSource Mode=FindAncestor, AncestorType={x:Type RichTextBox}}}" />
             </RichTextBox.InputBindings>
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">

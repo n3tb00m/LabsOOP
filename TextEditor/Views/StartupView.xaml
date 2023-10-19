@@ -28,7 +28,7 @@
             <ItemsControl ItemsSource="{Binding RecentFiles}" ItemTemplate="{StaticResource FilePreviewTemplate}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel Orientation="Horizontal" />
+                        <WrapPanel Orientation="Horizontal"  Margin="5,0,5,5"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>

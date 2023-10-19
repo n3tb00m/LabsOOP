@@ -18,12 +18,13 @@ namespace TextEditor.ViewModels
     internal class StartupViewModel : ViewModelBase
     {
         public ObservableCollection<TextFile> RecentFiles { get; set; }
-        public TextService TextService { get; set; } = null!;
         public ICommand UpdateViewCommand { get; }
 
         public StartupViewModel(NavigationMediator _mediator)
         {
             UpdateViewCommand = new ChangeViewCommand(_mediator);
+
+            LoadFiles();
         }
 
         public void LoadFiles()
