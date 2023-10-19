@@ -68,5 +68,10 @@ namespace TextEditor.Views
             currentRow.Text = "Row: " + currentLineNumber.ToString();
             currentColumn.Text = "Column: " + column.ToString();
         }
+
+        private void ShowAbout(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("vlados", "About");
+        }
     }
 }

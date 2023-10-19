@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextEditor"
-        xmlns:vm="clr-namespace:TextEditor.ViewModels"
+        xmlns:cmd="clr-namespace:TextEditor.Commands"
         mc:Ignorable="d"
         Title="Texty" Height="450" Width="800">
 
