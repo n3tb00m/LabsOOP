@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="TextEditor.Views.StartupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TextEditor.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="WhiteSmoke">
+    
+    <DockPanel>
+        <DockPanel VerticalAlignment="Stretch" MinWidth="160" >
+            <Button DockPanel.Dock="Top" Content="New file" Command="{Binding UpdateViewCommand}" CommandParameter="New" HorizontalAlignment="Center" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,5,5,3"/>
+            <Button DockPanel.Dock="Top" Content="Open file" Command="{Binding UpdateViewCommand}" CommandParameter="Open" HorizontalAlignment="Center" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,3,5,5"/>
+            <Separator DockPanel.Dock="Top" Background="LightSlateGray"/>
+            <CheckBox Content="Open last file" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Margin="5" VerticalContentAlignment="Center">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="1.3" ScaleY="1.3" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+        </DockPanel>
+
+        <StackPanel Orientation="Vertical" Background="LightSlateGray" Width="1">
+        </StackPanel>
+
+        <StackPanel VerticalAlignment="Stretch">
+            <Label Content="Recent files" FontSize="36" Margin="5"/>
+            <ItemsControl ItemsSource="{Binding RecentFiles}" ItemTemplate="{StaticResource FilePreviewTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

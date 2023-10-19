@@ -1,0 +1,56 @@
+﻿<Application x:Class="TextEditor.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TextEditor"
+             xmlns:cmd="clr-namespace:TextEditor.Commands"
+             xmlns:vm="clr-namespace:TextEditor.ViewModels"
+              xmlns:views="clr-namespace:TextEditor.Views">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <cmd:NewFileCommand x:Key="NewFileCommand" />
+            <!--<cmd:OpenFileCommand x:Key="OpenFileCommand" />-->
+            <!--<cmd:OpenFileCommand x:Key="SaveFileCommand" />-->
+
+            <DataTemplate DataType="{x:Type vm:StartupViewModel}">
+                <views:StartupView></views:StartupView>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:TextViewModel}">
+                <views:TextView></views:TextView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="FilePreviewTemplate">
+                <Button Command="{Binding DataContext.OpenPreviewFileCommand, RelativeSource={RelativeSource AncestorType=WrapPanel}}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=FileName}" />
+                        <TextBlock Text="{Binding Path=FileExtension}"/>
+                        <TextBlock Text="{Binding Path=LastChange}"/>
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="buttonBorder" BorderBrush="Transparent" BorderThickness="1">
+                                <Grid Margin="0">
+                                    <Rectangle x:Name="background" Fill="{TemplateBinding Background}"/>
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="buttonBorder" Property="BorderThickness" Value="1"/>
+                                    <Setter TargetName="buttonBorder" Property="BorderBrush" Value="Black"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
