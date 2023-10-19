@@ -21,9 +21,9 @@
             </DataTemplate>
 
             <DataTemplate x:Key="FilePreviewTemplate">
-                <Button Command="{StaticResource NewFileCommand}" CommandParameter="{Binding FilePath}" Margin="5">
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=LastChange}" FontSize="16"/>
+                <Button Command="{StaticResource NewFileCommand}" CommandParameter="{Binding FilePath}" Margin="5" MinHeight="60" MinWidth="120" VerticalContentAlignment="Stretch">
+                    <DockPanel Margin="5"> 
+                        <TextBlock DockPanel.Dock="Bottom" Text="{Binding Path=LastChange}" FontSize="15"/>
                         <DockPanel>
                             <TextBlock Text="{Binding Path=FileName}" VerticalAlignment="Top" FontSize="14" />
                             <TextBlock Text="{Binding Path=FileExtension}" DockPanel.Dock="Right" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="16"/>

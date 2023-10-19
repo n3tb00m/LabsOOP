@@ -27,25 +27,35 @@ namespace TextEditor.Commands
             {
                 string filepath = parameter?.ToString();
 
-                TextFile file = new TextFile(filepath);
-
-                if (vm.SelectedViewModel is TextViewModel model)
+                if (!string.IsNullOrEmpty(filepath))
                 {
-                    if (string.IsNullOrEmpty(filepath))
+                    try
                     {
-                        if (!model.openedFiles.Any(t => t.FileName == "New File*"))
-                            model.openedFiles.Add(file);
+                        TextFile file = new TextFile(filepath);
+
+                        if (vm.SelectedViewModel is TextViewModel model)
+                        {
+                            if (string.IsNullOrEmpty(filepath))
+                            {
+                                if (!model.openedFiles.Any(t => t.FileName == "New File*"))
+                                    model.openedFiles.Add(file);
+                            }
+                            else model.openedFiles.Add(file);
+                        }
+                        else if (vm.SelectedViewModel is StartupViewModel)
+                        {
+                            vm.mediator.CurrentViewModel = new TextViewModel(vm.mediator);
+
+                            ((TextViewModel)vm.SelectedViewModel).openedFiles.Add(file);
+                        }
+
+                        if (!string.IsNullOrEmpty(filepath)) TextService.AddToRecentFiles(file);
                     }
-                    else model.openedFiles.Add(file);
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Не вдалося відкрити файл.");
+                    }
                 }
-                else if (vm.SelectedViewModel is StartupViewModel)
-                {
-                    vm.mediator.CurrentViewModel = new TextViewModel(vm.mediator);
-
-                    ((TextViewModel)vm.SelectedViewModel).openedFiles.Add(file);
-                }
-
-                if (!string.IsNullOrEmpty(filepath)) TextService.AddToRecentFiles(file);
             }
         }
     }

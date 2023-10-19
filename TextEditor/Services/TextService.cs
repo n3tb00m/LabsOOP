@@ -69,7 +69,7 @@ namespace TextEditor.Services
                 recentFiles.Dequeue();
             }
 
-            if (!recentFiles.Contains(file))
+            if (!recentFiles.Any(f => f.FilePath == file.FilePath))
             {
                 recentFiles.Enqueue(file);
                 File.WriteAllText("recent.json", JsonSerializer.Serialize<Queue<TextFile>>(recentFiles));

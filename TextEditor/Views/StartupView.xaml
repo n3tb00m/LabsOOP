@@ -10,14 +10,10 @@
     
     <DockPanel>
         <DockPanel VerticalAlignment="Stretch" MinWidth="160" >
-            <Button DockPanel.Dock="Top" Content="New file" Command="{Binding UpdateViewCommand}" CommandParameter="New" HorizontalAlignment="Center" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,5,5,3"/>
-            <Button DockPanel.Dock="Top" Content="Open file" Command="{Binding UpdateViewCommand}" CommandParameter="Open" HorizontalAlignment="Center" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,3,5,5"/>
+            <Button DockPanel.Dock="Top" Content="New file" Command="{Binding UpdateViewCommand}" CommandParameter="New" HorizontalAlignment="Stretch" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,5,5,3"/>
+            <Button DockPanel.Dock="Top" Content="Open file" Command="{Binding UpdateViewCommand}" CommandParameter="Open" HorizontalAlignment="Stretch" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,3,5,5"/>
             <Separator DockPanel.Dock="Top" Background="LightSlateGray"/>
-            <CheckBox Content="Open last file" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="13" Margin="5" VerticalContentAlignment="Center">
-                <CheckBox.LayoutTransform>
-                    <ScaleTransform ScaleX="1.3" ScaleY="1.3" />
-                </CheckBox.LayoutTransform>
-            </CheckBox>
+            <Button DockPanel.Dock="Bottom" Content="Exit" Command="ApplicationCommands.Close" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FontSize="20" Background="Transparent" BorderThickness="0" Margin="5,3,5,5"/>
         </DockPanel>
 
         <StackPanel Orientation="Vertical" Background="LightSlateGray" Width="1">
